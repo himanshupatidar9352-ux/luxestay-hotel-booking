@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeStay | Luxury Hotels, Overwater Villas & Iconic Resorts</title>
+  <meta name="description" content="Discover and book handpicked 5-star luxury hotels, overwater retreats, cliffside villas, and historic palaces around the world.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-notice">
+    <span>✨ VIP Exclusive: Enjoy <strong>20% OFF</strong> all suites with code <strong>LUXE20</strong> | Free cancellation on 98% of rooms</span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="brand-logo-icon">
+          <svg class="icon" style="width: 22px; height: 22px; stroke-width: 2.2;" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          LUXESTAY
+          <span>Hotels &amp; Resorts</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Currency Select -->
+        <select id="currency-select" class="currency-select" title="Change Currency">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="INR">INR (₹)</option>
+        </select>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="theme-btn" title="Toggle Dark/Light Mode">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <!-- Wishlist -->
+        <button id="nav-wishlist-btn" class="nav-btn" title="Saved Favorites">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span>Saved</span>
+          <span id="wishlist-counter-badge" class="badge-count" style="display: none;">0</span>
+        </button>
+
+        <!-- My Bookings Portal -->
+        <button id="nav-my-bookings-btn" class="nav-btn" title="Manage Bookings & Vouchers">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          <span>My Bookings</span>
+        </button>
+
+        <!-- Admin Portal -->
+        <button id="nav-admin-btn" class="nav-btn admin-pill" title="Hotelier & Partner Dashboard">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <span>Admin Portal</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section & Booking Engine -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-subtitle">
+        <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        Handcrafted Escapes for the Discerning Traveler
+      </div>
+      <h1 class="hero-title">Indulge in Extraordinary Stays Across the Globe</h1>
+      <p class="hero-description">
+        Curated portfolio of overwater bungalows, cliffside sanctuaries, alpine chalets, and historic grand palaces with private butler service.
+      </p>
+
+      <!-- Booking Search Engine -->
+      <div class="search-card">
+        <div class="search-form-grid">
+          <!-- Destination Field -->
+          <div class="search-field">
+            <label for="search-destination">Destination / Resort</label>
+            <input type="text" id="search-destination" placeholder="e.g. Lake Como, Maldives, Kyoto, Paris" autocomplete="off" />
+          </div>
+
+          <!-- Check-in Date -->
+          <div class="search-field">
+            <label for="search-checkin">Check-in</label>
+            <input type="date" id="search-checkin" />
+          </div>
+
+          <!-- Check-out Date -->
+          <div class="search-field">
+            <label for="search-checkout">Check-out</label>
+            <input type="date" id="search-checkout" />
+          </div>
+
+          <!-- Guests & Rooms Selector -->
+          <div class="search-field" style="position: relative;">
+            <label>Guests &amp; Rooms</label>
+            <button type="button" id="guest-picker-btn" class="guest-picker-btn">
+              <span id="guest-display-text">2 Guests, 1 Room</span>
+              <svg class="icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+
+            <!-- Popover -->
+            <div id="guest-popover" class="guest-popover">
+              <div class="guest-row">
+                <div class="guest-label">
+                  <div>Adults</div>
+                  <div>Ages 13+</div>
+                </div>
+                <div class="stepper">
+                  <button type="button" class="stepper-btn" data-stepper="adults" data-dir="-1">-</button>
+                  <span id="adults-val" class="stepper-val">2</span>
+                  <button type="button" class="stepper-btn" data-stepper="adults" data-dir="1">+</button>
+                </div>
+              </div>
+
+              <div class="guest-row">
+                <div class="guest-label">
+                  <div>Children</div>
+                  <div>Ages 0-12</div>
+                </div>
+                <div class="stepper">
+                  <button type="button" class="stepper-btn" data-stepper="children" data-dir="-1">-</button>
+                  <span id="children-val" class="stepper-val">0</span>
+                  <button type="button" class="stepper-btn" data-stepper="children" data-dir="1">+</button>
+                </div>
+              </div>
+
+              <div class="guest-row">
+                <div class="guest-label">
+                  <div>Rooms</div>
+                  <div>Total suites</div>
+                </div>
+                <div class="stepper">
+                  <button type="button" class="stepper-btn" data-stepper="rooms" data-dir="-1">-</button>
+                  <span id="rooms-val" class="stepper-val">1</span>
+                  <button type="button" class="stepper-btn" data-stepper="rooms" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search CTA -->
+          <button type="button" id="hero-search-btn" class="search-btn">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Search</span>
+          </button>
+        </div>
+
+        <div class="promo-bar">
+          <div class="promo-item">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Best Rate Guarantee</span>
+          </div>
+          <div class="promo-item">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>Flexible 48h Free Cancellation</span>
+          </div>
+          <div class="promo-item">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>VIP Butler &amp; Welcome Amenities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trending Dream Destinations -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Trending Dream Destinations</h2>
+          <p class="section-desc">Handpicked sanctuaries in the most breathtaking corners of the earth.</p>
+        </div>
+      </div>
+
+      <div class="destinations-grid">
+        <div class="dest-card" data-dest-city="Lake Como">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Lake Como" />
+          <div class="dest-overlay">
+            <div class="dest-tag">Lakeside Romance</div>
+            <div class="dest-name">Lake Como</div>
+            <div class="dest-count">Italy • 5 Palaces</div>
+          </div>
+        </div>
+
+        <div class="dest-card" data-dest-city="Maldives">
+          <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80" alt="Maldives" />
+          <div class="dest-overlay">
+            <div class="dest-tag">Turquoise Lagoon</div>
+            <div class="dest-name">Maldives</div>
+            <div class="dest-count">Noonu Atoll • 4 Overwater Retreats</div>
+          </div>
+        </div>
+
+        <div class="dest-card" data-dest-city="Santorini">
+          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=600&q=80" alt="Santorini" />
+          <div class="dest-overlay">
+            <div class="dest-tag">Aegean Sunsets</div>
+            <div class="dest-name">Santorini</div>
+            <div class="dest-count">Greece • 6 Cliffside Caves</div>
+          </div>
+        </div>
+
+        <div class="dest-card" data-dest-city="Kyoto">
+          <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=80" alt="Kyoto" />
+          <div class="dest-overlay">
+            <div class="dest-tag">Zen &amp; Bonsai</div>
+            <div class="dest-name">Kyoto</div>
+            <div class="dest-count">Japan • 3 Riverside Havens</div>
+          </div>
+        </div>
+
+        <div class="dest-card" data-dest-city="New York">
+          <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80" alt="New York" />
+          <div class="dest-overlay">
+            <div class="dest-tag">Fifth Avenue</div>
+            <div class="dest-name">New York City</div>
+            <div class="dest-count">USA • Central Park Grandeur</div>
+          </div>
+        </div>
+
+        <div class="dest-card" data-dest-city="Swiss Alps">
+          <img src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=600&q=80" alt="Swiss Alps" />
+          <div class="dest-overlay">
+            <div class="dest-tag">Ski &amp; Thermal Spa</div>
+            <div class="dest-name">Swiss Alps</div>
+            <div class="dest-count">Switzerland • 4 Chalet Sanctuaries</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Hotel Catalog & Filter Section -->
+  <section class="section" id="listings-section" style="padding-top: 20px;">
+    <div class="container">
+      <div class="listings-layout">
+
+        <!-- Left Filter Sidebar -->
+        <aside class="filter-panel">
+          <div class="filter-header">
+            <h3>Filters</h3>
+            <button id="reset-filters-btn" class="filter-reset-btn">Reset All</button>
+          </div>
+
+          <!-- Price Range Slider -->
+          <div class="filter-group">
+            <div class="filter-group-title">
+              <span>Max Price Per Night</span>
+              <span id="max-price-display" style="color: var(--primary);">$2,000</span>
+            </div>
+            <input type="range" id="price-slider" class="range-slider" min="200" max="2500" step="50" value="2000" />
+            <div class="price-range-inputs">
+              <span>$200</span>
+              <span>$2,500+</span>
+            </div>
+          </div>
+
+          <!-- Property Type -->
+          <div class="filter-group">
+            <div class="filter-group-title">Property Experience</div>
+            <div class="filter-checkbox-list">
+              <label class="filter-checkbox-label">
+                <input type="radio" name="prop_type" value="All" checked />
+                <span>All Experiences</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="prop_type" value="Overwater" />
+                <span>Overwater Island Villa</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="prop_type" value="Palace" />
+                <span>Historic Palace &amp; Grandeur</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="prop_type" value="Cliffside" />
+                <span>Cliffside &amp; Caldera</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="prop_type" value="Alpine" />
+                <span>Alpine Chalet &amp; Ski</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="prop_type" value="Wellness" />
+                <span>Jungle &amp; Desert Wellness</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Guest Rating -->
+          <div class="filter-group">
+            <div class="filter-group-title">Guest Review Score</div>
+            <div class="filter-checkbox-list">
+              <label class="filter-checkbox-label">
+                <input type="radio" name="star_rating" value="0" checked />
+                <span>Any Score</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="star_rating" value="9.6" />
+                <span>9.6+ Exceptional</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="star_rating" value="9.2" />
+                <span>9.2+ Superb</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="radio" name="star_rating" value="9.0" />
+                <span>9.0+ Excellent</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Key Luxury Amenities -->
+          <div class="filter-group">
+            <div class="filter-group-title">Curated Perks</div>
+            <div class="filter-checkbox-list">
+              <label class="filter-checkbox-label">
+                <input type="checkbox" class="amenity-cb" value="Pool" />
+                <span>Private Pool / Plunge</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" class="amenity-cb" value="Spa" />
+                <span>Luxury Thermal Spa</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" class="amenity-cb" value="Butler" />
+                <span>Dedicated 24/7 Butler</span>
+              </label>
+              <label class="filter-checkbox-label">
+                <input type="checkbox" class="amenity-cb" value="Dining" />
+                <span>Michelin-Starred Dining</span>
+              </label>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Listings Area -->
+        <main>
+          <!-- Toolbar -->
+          <div class="listings-toolbar">
+            <div class="results-count">
+              Showing <span id="results-count-num">10</span> luxury sanctuaries (<span id="night-count-badge">3 nights</span>)
+            </div>
+
+            <div class="toolbar-controls">
+              <select id="sort-select" class="sort-select">
+                <option value="recommended">Featured / Curated</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="rating_desc">Highest Guest Rating</option>
+                <option value="reviews_desc">Most Reviewed</option>
+              </select>
+
+              <div class="view-mode-toggle">
+                <button id="grid-view-btn" class="view-btn active" title="Grid View">
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+                <button id="list-view-btn" class="view-btn" title="List View">
+                  <svg class="icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotels Container -->
+          <div id="hotels-grid" class="hotels-container grid-view">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+
+  <!-- Hotel Details Modal -->
+  <div id="hotel-details-modal" class="modal-backdrop">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" title="Close">✕</button>
+      
+      <div class="hotel-modal-gallery">
+        <img src="" class="modal-main-img" alt="Hotel Gallery Main" />
+        <div class="modal-thumbs-row"></div>
+      </div>
+
+      <div class="modal-content-body">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+          <div>
+            <h2 id="modal-hotel-title" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 4px;"></h2>
+            <div id="modal-hotel-city" style="color: var(--text-muted); font-size: 0.9rem;"></div>
+          </div>
+          <div style="text-align: right;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span id="modal-hotel-rating" class="rating-score" style="font-size: 1.1rem; padding: 6px 12px;"></span>
+              <span style="font-weight: 700; color: var(--text-main);">Exceptional</span>
+            </div>
+            <div id="modal-hotel-reviews-count" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;"></div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-tab="rooms">Available Suites &amp; Rooms</button>
+          <button class="modal-tab-btn" data-tab="overview">Property Overview</button>
+          <button class="modal-tab-btn" data-tab="amenities">Bespoke Amenities</button>
+          <button class="modal-tab-btn" data-tab="reviews">Guest Reviews</button>
+        </div>
+
+        <!-- Tab: Rooms -->
+        <div id="tab-pane-rooms" class="tab-pane active">
+          <div id="modal-rooms-container" class="room-cards-list"></div>
+        </div>
+
+        <!-- Tab: Overview -->
+        <div id="tab-pane-overview" class="tab-pane">
+          <p id="modal-hotel-desc" style="font-size: 1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 24px;"></p>
+          <div style="background: var(--bg-subtle); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1rem; margin-bottom: 10px; font-weight: 700;">LuxeStay Complimentary Inclusions</h4>
+            <ul style="list-style-type: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.88rem;">
+              <li>✓ Chilled Welcome Bottle of Moët &amp; Chandon</li>
+              <li>✓ Daily Gourmet Breakfast for 2 guests</li>
+              <li>✓ 100 USD Resort Spa &amp; Wellness Credit</li>
+              <li>✓ Guaranteed Early Check-in &amp; 4 PM Late Check-out</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tab: Amenities -->
+        <div id="tab-pane-amenities" class="tab-pane">
+          <div id="modal-amenities-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;"></div>
+        </div>
+
+        <!-- Tab: Reviews -->
+        <div id="tab-pane-reviews" class="tab-pane">
+          <div id="modal-reviews-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout & E-Commerce Booking Modal -->
+  <div id="checkout-modal" class="modal-backdrop">
+    <div class="modal-dialog" style="max-width: 900px;">
+      <button class="modal-close-btn" title="Close">✕</button>
+      
+      <div style="padding: 28px;">
+        <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;">Secure Luxury Checkout</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 24px;">Complete your reservation in seconds with encrypted 256-bit protection.</p>
+
+        <form id="checkout-form">
+          <div class="checkout-grid">
+
+            <!-- Left: Guest Details & Payment -->
+            <div>
+              <div class="checkout-card" style="margin-bottom: 20px;">
+                <h3 class="checkout-step-title">
+                  <span class="step-num">1</span>
+                  Guest Information
+                </h3>
+
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label>First Name *</label>
+                    <input type="text" id="guest-fname" required placeholder="e.g. Alexander" value="Alexander" />
+                  </div>
+                  <div class="form-field">
+                    <label>Last Name *</label>
+                    <input type="text" id="guest-lname" required placeholder="e.g. Hamilton" value="Hamilton" />
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label>Email Address * (for voucher)</label>
+                    <input type="email" id="guest-email" required placeholder="alexander@luxury.com" value="alexander@luxury.com" />
+                  </div>
+                  <div class="form-field">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="guest-phone" required placeholder="+1 555-0199" value="+1 (555) 019-2841" />
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label>Special Requests / Arrival Time (Optional)</label>
+                  <textarea id="guest-requests" rows="2" placeholder="Dietary restrictions, high floor preference, airport transfer flight number..."></textarea>
+                </div>
+              </div>
+
+              <!-- Payment Simulation -->
+              <div class="checkout-card">
+                <h3 class="checkout-step-title">
+                  <span class="step-num">2</span>
+                  Payment Method
+                </h3>
+
+                <!-- Test Card Quick Button -->
+                <button type="button" id="fill-test-card-btn" class="test-card-fill-btn">
+                  ⚡ Autofill VIP Test Card
+                </button>
+
+                <!-- Live Card Preview -->
+                <div class="credit-card-preview">
+                  <div class="card-chip"></div>
+                  <div id="card-preview-num" class="card-num-display">•••• •••• •••• ••••</div>
+                  <div class="card-footer-preview">
+                    <div>
+                      <span>Cardholder</span>
+                      <strong id="card-preview-name">ALEXANDER HAMILTON</strong>
+                    </div>
+                    <div>
+                      <span>Expires</span>
+                      <strong id="card-preview-exp">12/28</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label>Card Number *</label>
+                  <input type="text" id="card-number-input" required placeholder="4532 8901 2345 8892" />
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label>Cardholder Name *</label>
+                    <input type="text" id="card-holder-input" required placeholder="Alexander Hamilton" />
+                  </div>
+                  <div class="form-field">
+                    <label>Expires (MM/YY) *</label>
+                    <input type="text" id="card-exp-input" required placeholder="12/28" maxlength="5" />
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label>CVV Security Code *</label>
+                    <input type="password" id="card-cvv-input" required placeholder="889" maxlength="4" />
+                  </div>
+                  <div class="form-field">
+                    <label>Payment Gateway</label>
+                    <select id="payment-type">
+                      <option value="Credit Card">Credit / Debit Card</option>
+                      <option value="Apple Pay">Apple Pay</option>
+                      <option value="PayPal">PayPal VIP</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Order Summary -->
+            <div>
+              <div class="checkout-card" style="position: sticky; top: 20px;">
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px;">Reservation Summary</h3>
+
+                <div class="summary-hotel-header">
+                  <img id="checkout-hotel-img" class="summary-hotel-img" src="" alt="Hotel Preview" />
+                  <div>
+                    <h4 id="checkout-hotel-name" style="font-size: 1rem; font-weight: 700; line-height: 1.2;"></h4>
+                    <div id="checkout-room-name" style="font-size: 0.8rem; color: var(--primary); font-weight: 600; margin-top: 2px;"></div>
+                  </div>
+                </div>
+
+                <div class="summary-dates-box">
+                  <div style="font-weight: 700; margin-bottom: 2px;">Stay Duration</div>
+                  <div id="checkout-dates-display" style="color: var(--text-muted); font-size: 0.82rem;"></div>
+                </div>
+
+                <!-- Meal Plan Add-on -->
+                <div class="form-field" style="margin-bottom: 16px;">
+                  <label>Curated Meal Package</label>
+                  <select id="checkout-meal-plan" style="font-size: 0.85rem;">
+                    <option value="breakfast-included">Gourmet Breakfast Included (Free)</option>
+                    <option value="half-board">Half Board: Champagne Dinner &amp; Breakfast (+$95/night)</option>
+                  </select>
+                </div>
+
+                <!-- Coupon Box -->
+                <div style="margin-bottom: 16px;">
+                  <label style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 4px;">Promo Coupon Code</label>
+                  <div class="coupon-box">
+                    <input type="text" id="coupon-code-input" class="coupon-input" placeholder="e.g. LUXE20" value="LUXE20" />
+                    <button type="button" id="apply-coupon-btn" class="apply-coupon-btn">Apply</button>
+                  </div>
+                  <div id="coupon-feedback-msg" class="coupon-msg"></div>
+                </div>
+
+                <!-- Price Breakdown Table -->
+                <div style="margin-top: 18px;">
+                  <div class="price-breakdown-row">
+                    <span>Suite Subtotal</span>
+                    <strong id="chk-subtotal-val">$0</strong>
+                  </div>
+                  <div class="price-breakdown-row">
+                    <span>Meal Package</span>
+                    <strong id="chk-meal-val">$0</strong>
+                  </div>
+                  <div class="price-breakdown-row">
+                    <span>Resort &amp; Amenity Fee</span>
+                    <strong id="chk-resort-val">$40</strong>
+                  </div>
+                  <div class="price-breakdown-row">
+                    <span>Estimated Local Taxes (10%)</span>
+                    <strong id="chk-taxes-val">$0</strong>
+                  </div>
+                  <div class="price-breakdown-row" id="chk-discount-row" style="color: var(--success); display: none;">
+                    <span>VIP Promo Discount</span>
+                    <strong id="chk-discount-val">-$0</strong>
+                  </div>
+
+                  <div class="price-breakdown-total">
+                    <span>Total Amount</span>
+                    <span id="chk-total-val" style="color: var(--primary);">$0</span>
+                  </div>
+                </div>
+
+                <button type="submit" id="complete-booking-btn" class="pay-now-btn">
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  <span>Complete Reservation (<span id="chk-pay-btn-amount">$0</span>)</span>
+                </button>
+                <div style="text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 8px;">
+                  🔒 Instant confirmation • No booking fees
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation & Voucher Modal -->
+  <div id="voucher-modal" class="modal-backdrop">
+    <div class="modal-dialog" style="max-width: 740px;">
+      <button class="modal-close-btn print-btn-no" title="Close">✕</button>
+
+      <div class="voucher-card">
+        <div class="voucher-header">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); font-weight: 800;">Official Confirmation Voucher</div>
+            <h2 style="font-size: 1.6rem; font-weight: 800; margin-top: 2px;">Reservation Confirmed</h2>
+          </div>
+          <div>
+            <span class="voucher-ref-badge" id="voucher-ref-code">LX-84920</span>
+          </div>
+        </div>
+
+        <div class="voucher-grid">
+          <div>
+            <div style="margin-bottom: 16px;">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Property</div>
+              <h3 id="voucher-hotel-name" style="font-size: 1.3rem; font-weight: 700;"></h3>
+              <div id="voucher-room-name" style="font-size: 0.9rem; color: var(--primary); font-weight: 600;"></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Check-in</div>
+                <strong id="voucher-checkin" style="font-size: 0.95rem;"></strong>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">From 3:00 PM</div>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Check-out</div>
+                <strong id="voucher-checkout" style="font-size: 0.95rem;"></strong>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Until 12:00 PM (Late checkout granted)</div>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Lead Guest</div>
+                <strong id="voucher-guest-name"></strong>
+                <div id="voucher-guest-email" style="font-size: 0.78rem; color: var(--text-muted);"></div>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Stay Details</div>
+                <strong id="voucher-nights-guests"></strong>
+                <div id="voucher-meal-plan" style="font-size: 0.78rem; color: var(--success); font-weight: 600;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="voucher-qr-box">
+            <div class="qr-code-mock">
+              <!-- SVG Mock QR Code -->
+              <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
+                <rect width="100" height="100" fill="#fff"/>
+                <path d="M10 10h30v30h-30z M15 15h20v20h-20z M20 20h10v10h-10z" fill="#000"/>
+                <path d="M60 10h30v30h-30z M65 15h20v20h-20z M70 20h10v10h-10z" fill="#000"/>
+                <path d="M10 60h30v30h-30z M15 65h20v20h-20z M20 70h10v10h-10z" fill="#000"/>
+                <rect x="45" y="20" width="10" height="20" fill="#000"/>
+                <rect x="50" y="55" width="20" height="10" fill="#000"/>
+                <rect x="75" y="65" width="15" height="25" fill="#000"/>
+              </svg>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Show at front desk for VIP priority check-in</div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Total Paid &amp; Guaranteed</div>
+            <div id="voucher-total-paid" style="font-size: 1.4rem; font-weight: 800; color: var(--primary);"></div>
+            <div id="voucher-booking-date" style="font-size: 0.72rem; color: var(--text-muted);"></div>
+          </div>
+
+          <div style="display: flex; gap: 10px;" class="print-btn-no">
+            <button id="print-voucher-btn" class="nav-btn" style="background: var(--bg-subtle);">
+              <svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>Print / PDF</span>
+            </button>
+            <button data-modal-close class="explore-btn" style="padding: 8px 20px;">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- "My Bookings" Customer Portal Modal -->
+  <div id="my-bookings-modal" class="modal-backdrop">
+    <div class="modal-dialog" style="max-width: 820px;">
+      <button class="modal-close-btn" title="Close">✕</button>
+
+      <div style="padding: 30px;">
+        <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;">Manage Reservations</h2>
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px;">Lookup your bookings, download official vouchers, or cancel with a full refund.</p>
+
+        <!-- Search by email -->
+        <div style="display: flex; gap: 10px; margin-bottom: 24px;">
+          <input type="email" id="my-bookings-email-input" class="form-field" style="margin-bottom: 0; flex: 1; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-subtle); color: var(--text-main);" placeholder="Enter your booking email (e.g. alexander@luxury.com)" value="alexander@luxury.com" />
+          <button id="my-bookings-search-btn" class="explore-btn" style="padding: 10px 22px;">Search Bookings</button>
+        </div>
+
+        <div id="my-bookings-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin / Hotelier Portal Modal -->
+  <div id="admin-modal" class="modal-backdrop">
+    <div class="modal-dialog" style="max-width: 960px;">
+      <button class="modal-close-btn" title="Close">✕</button>
+
+      <div style="padding: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 800;">Hotelier &amp; Operations Dashboard</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">Live platform metrics, reservations, and inventory management.</p>
+          </div>
+          <span class="status-badge confirmed" style="font-size: 0.8rem; padding: 6px 12px;">● Live SQLite Sync</span>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="admin-stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-title">Gross Revenue</div>
+            <div id="admin-stat-revenue" class="stat-card-val" style="color: var(--primary);">$0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-title">Total Bookings</div>
+            <div id="admin-stat-bookings" class="stat-card-val">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-title">Listed Sanctuaries</div>
+            <div id="admin-stat-hotels" class="stat-card-val">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-title">Avg Guest Rating</div>
+            <div id="admin-stat-rating" class="stat-card-val">9.6 / 10</div>
+          </div>
+        </div>
+
+        <!-- Recent Reservations Table -->
+        <div style="margin-bottom: 30px;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Recent Guest Bookings</h3>
+          <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ref</th>
+                  <th>Guest</th>
+                  <th>Hotel</th>
+                  <th>Check-In</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-recent-bookings-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Add New Hotel Form -->
+        <div style="background: var(--bg-subtle); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 14px;">List a New Luxury Hotel / Resort</h3>
+          <form id="add-hotel-form">
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label>Hotel Name *</label>
+                <input type="text" id="new-hotel-name" required placeholder="e.g. Belmond Hotel Splendido" />
+              </div>
+              <div class="form-field">
+                <label>Property Style *</label>
+                <select id="new-hotel-type">
+                  <option value="Luxury Palace Resort">Luxury Palace Resort</option>
+                  <option value="Overwater Island Resort">Overwater Island Resort</option>
+                  <option value="Cliffside Boutique Suites">Cliffside Boutique Suites</option>
+                  <option value="Alpine Ski & Spa Resort">Alpine Ski & Spa Resort</option>
+                  <option value="Desert Wilderness Resort">Desert Wilderness Resort</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label>City / Location *</label>
+                <input type="text" id="new-hotel-city" required placeholder="e.g. Portofino" />
+              </div>
+              <div class="form-field">
+                <label>Country *</label>
+                <input type="text" id="new-hotel-country" required placeholder="e.g. Italy" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label>Starting Price Per Night ($ USD) *</label>
+                <input type="number" id="new-hotel-price" required placeholder="590" value="590" />
+              </div>
+              <div class="form-field">
+                <label>Hero Image URL</label>
+                <input type="url" id="new-hotel-image" placeholder="https://images.unsplash.com/..." />
+              </div>
+            </div>
+
+            <button type="submit" class="explore-btn" style="padding: 12px 24px;">Publish Luxury Hotel</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand" style="margin-bottom: 16px;">
+            <div class="brand-logo-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg>
+            </div>
+            <div class="brand-title" style="color: #fff;">
+              LUXESTAY
+              <span>Hotels &amp; Resorts</span>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; line-height: 1.7; margin-bottom: 16px;">
+            The world's leading luxury hotel reservation platform. Every property in our portfolio meets rigorous 5-star hospitality, architectural elegance, and wellness standards.
+          </p>
+          <div style="font-size: 0.8rem; color: #64748b;">
+            24/7 Global Concierge: +1 (800) LUXE-STAY
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Destinations</h4>
+          <ul>
+            <li><a href="#listings-section">Lake Como Palaces</a></li>
+            <li><a href="#listings-section">Maldives Overwater Retreats</a></li>
+            <li><a href="#listings-section">Santorini Cliffside Suites</a></li>
+            <li><a href="#listings-section">Swiss Alps Thermal Chalets</a></li>
+            <li><a href="#listings-section">Kyoto Zen Sanctuaries</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Guest Experience</h4>
+          <ul>
+            <li><a href="#!">Best Rate Guarantee</a></li>
+            <li><a href="#!">Flexible Cancellation Policy</a></li>
+            <li><a href="#!">VIP Butler Service</a></li>
+            <li><a href="#!">Private Jet Transfers</a></li>
+            <li><a href="#!">Corporate &amp; Group Retreats</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Curated Newsletter</h4>
+          <p style="font-size: 0.82rem; margin-bottom: 12px;">Receive secret flash sales and invitations to newly opened private island sanctuaries.</p>
+          <div style="display: flex; gap: 8px;">
+            <input type="email" placeholder="Your email" style="background: #1e293b; border: 1px solid #334155; padding: 8px 12px; border-radius: var(--radius-sm); color: #fff; font-size: 0.85rem; flex: 1;" />
+            <button class="explore-btn" style="padding: 8px 14px;" onclick="alert('Thank you for subscribing to LuxeStay Privé.')">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 LuxeStay Hotels &amp; Resorts Worldwide. All rights reserved.</div>
+        <div style="display: flex; gap: 16px;">
+          <a href="#!">Privacy Policy</a>
+          <a href="#!">Terms of Service</a>
+          <a href="#!">Cookie Preferences</a>
+          <a href="#!">PCI-DSS Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

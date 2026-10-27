@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite Database (auto-generated on first run)
+*.db-journal
+*.sqlite3-journal
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local Environment & Secrets
+.env
+.venv/
+env/
+venv/
+
